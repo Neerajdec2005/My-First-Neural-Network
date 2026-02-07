@@ -1,3 +1,5 @@
+import numpy as np
+
 _in= [1.3, 3.2, 4.5, 7.2]
 
 weights=[[1.2 ,5.7, 3.1, 2.4],
@@ -9,10 +11,7 @@ bias=[4, 2.4, 3.4]
 layer_outputs=[]
 
 for i in range(len(weights)):
-    neuron_output=0
-    for j in range(len(_in)):
-        neuron_output+=_in[j]*weights[i][j]
-    neuron_output+=bias[i]
+    neuron_output=np.dot(weights[i], _in)+bias[i]
     layer_outputs.append(neuron_output)
 
 print(layer_outputs)
