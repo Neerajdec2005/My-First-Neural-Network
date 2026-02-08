@@ -8,10 +8,6 @@ weights=[[1.2 ,5.7, 3.1, 2.4],
 
 bias=[4, 2.4, 3.4]
 
-layer_outputs=[]
-
-for i in range(len(weights)):
-    neuron_output=np.dot(weights[i], _in)+bias[i]
-    layer_outputs.append(neuron_output)
+layer_outputs=np.dot(weights, _in) + bias
 
 print(layer_outputs)
