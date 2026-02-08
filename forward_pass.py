@@ -26,5 +26,5 @@ activation= ReLU_Activation()
 layer.forward(X)
 activation.forward(layer.output)
 
-print(layer.output)
+print(activation.output)
 
