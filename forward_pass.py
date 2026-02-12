@@ -25,6 +25,30 @@ class Softmax_Activation:
         normalize= exp_values/ np.sum(exp_values, axis=1, keepdims=True)
         self.output= normalize
 
+class Loss:
+    def calculate(self, output, y):
+        sample_losses=np.mean(self.forward(output, y))
+        return sample_losses
+
+class Categorical_Cross_Entropy(Loss):
+    def forward(self, pred, target):
+        pred_clipped= np.clip(pred, 1e-7, 1-1e-7)
+        if len(target.shape)==1:
+            loss=pred_clipped[range(len(pred)), target]
+        elif len(target.shape)==2:
+            loss=np.sum(pred_clipped*target, axis=1)
+        negative_log= -np.log(loss)
+        return negative_log
+    
+class Accuracy:
+    def calculate(self, output, y):
+        prediction= np.argmax(output, axis=1)
+        if len(y.shape)==2:
+            y= np.argmax(y, axis=1)
+        accuracy= np.mean(prediction==y)
+        return accuracy
+
+
 dense1= Layer_Dense(2, 5)
 activation= ReLU_Activation()
 
@@ -37,5 +61,9 @@ activation.forward(dense1.output)
 dense2.forward(activation.output)
 activation2.forward(dense2.output)
 
-print(activation2.output[:5])
+loss= Categorical_Cross_Entropy()
+
+accuracy= Accuracy()
+
+print(accuracy.calculate(activation2.output, y))
 
