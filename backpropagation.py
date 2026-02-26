@@ -51,6 +51,22 @@ def backward(x,w,b):
 
     print(" chain rule at multiplication with respect to RELU:", drelu_dw0, drelu_dw1, drelu_dw2, drelu_dx0, drelu_dx1, drelu_dx2)
 
+
+    dx= [drelu_dx0, drelu_dx1, drelu_dx2]
+    dw= [drelu_dw0, drelu_dw1, drelu_dw2]
+    db= drelu_db
+    # these are the gradients of the loss with respect to x,w,b respectively.
+
+    # now updating the parameters using gradient descent sample
+
+    w[0]+= -0.01*dw[0]
+    w[1]+= -0.01*dw[1]
+    w[2]+= -0.01*dw[2]
+    b+= -0.01*db
+
+
+
     # Hence this is how backpropagation works.
 
 backward(x,w,b)
+print("2nd pass after very simple optimizer:", forward(x,w,b))
