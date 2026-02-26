@@ -40,3 +40,4 @@ plt.plot(x,y, label="f(x)")
 plt.plot(plot_x, [tangent_line(x) for x in plot_x], label="tangent line at x=3")
 # plt.legend()
 plt.show()
+# this method is numerical derivative, also called universal derivative.
